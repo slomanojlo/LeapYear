@@ -1,19 +1,24 @@
 package rs.sloman.leapyear
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import rs.sloman.leapyear.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: MainViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
     }
 
