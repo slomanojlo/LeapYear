@@ -13,18 +13,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
-        android:maxLength="10"
+        android:maxLength="8"
         android:autofillHints="no"
+        android:gravity="center"
         android:hint="@string/enter_leap_year" />
 
     <Button
-        android:id="@+id/et_check_year"
+        android:id="@+id/btn_check_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/check"/>
 
     <TextView
+        android:id="@+id/tw_result"
         android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

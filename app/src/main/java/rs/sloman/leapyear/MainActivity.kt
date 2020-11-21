@@ -1,8 +1,12 @@
 package rs.sloman.leapyear
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import rs.sloman.leapyear.databinding.ActivityMainBinding
 
 
@@ -17,6 +21,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
+
+        binding.btnCheckYear.setOnClickListener {
+            if (binding.etEnterLeapYear.text.isNotEmpty()) {
+                val year = Integer.parseInt(binding.etEnterLeapYear.text.toString())
+
+                CoroutineScope(Dispatchers.Default).launch {
+                    viewModel.handleButtonClick(year)
+                }
+            }
+        }
+
+        viewModel.state.observe(this) {
+            when (it) {
+                MainViewModel.State.LEAP -> {
+                    binding.twResult.text = getString(R.string.this_year_is_leap)
+                    binding.twResult.visibility = View.VISIBLE
+                }
+
+                MainViewModel.State.NOT_LEAP -> {
+                    binding.twResult.text = getString(R.string.this_year_is_not_leap)
+                    binding.twResult.visibility = View.VISIBLE
+                }
+
+                else -> {
+                    binding.twResult.visibility = View.INVISIBLE
+                }
+            }
+        }
 
         setContentView(binding.root)
 
