@@ -23,13 +23,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:enabled="false"
         android:text="@string/check"/>
 
     <TextView
         android:id="@+id/tw_result"
-        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        tools:visibility="visible"
         tools:text="Result"/>
 
 </LinearLayout>

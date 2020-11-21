@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -49,6 +50,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        binding.etEnterLeapYear.doOnTextChanged{ text: CharSequence?, _, _, _ ->
+            viewModel.setState(MainViewModel.State.BLANK)
+            binding.btnCheckYear.isEnabled = !text.isNullOrEmpty()
+        }
+
 
         setContentView(binding.root)
 

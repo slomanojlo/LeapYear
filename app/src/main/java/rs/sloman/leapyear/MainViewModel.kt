@@ -45,4 +45,8 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun setState(state: State){
+        _state.value = state
+    }
+
 }
