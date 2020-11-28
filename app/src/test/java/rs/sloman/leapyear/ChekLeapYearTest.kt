@@ -9,20 +9,12 @@ import org.junit.runners.Parameterized
 class ChekLeapYearTest(
     private val year: Int,
     private val isLeapYear: Boolean,
-) {
+){
 
     @Test
     fun checkLeapYear() {
 
-        val actualResult: Boolean = when {
-            year % 4 == 0 -> {
-                when {
-                    year % 100 == 0 -> year % 400 == 0
-                    else -> true
-                }
-            }
-            else -> false
-        }
+        val actualResult: Boolean = LeapYearCheck.isLeapYear(year)
 
         assertEquals(isLeapYear, actualResult)
 
