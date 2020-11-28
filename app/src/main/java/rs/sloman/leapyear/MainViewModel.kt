@@ -17,7 +17,7 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> get() = _state
 
-    private suspend fun checkLeapYear(year: Int) : Boolean{
+    private suspend fun checkLeapYear(year: Int): Boolean {
 
         var isLeap = false
 
@@ -29,8 +29,15 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
         return isLeap
     }
 
-    suspend fun handleButtonClick(year: Int) {
-        _state.postValue(if (checkLeapYear(year)) State.LEAP else State.NOT_LEAP)
+    fun handleButtonClick(input: String) {
+        if (input.isNotEmpty()) {
+
+            viewModelScope.launch {
+                val year = Integer.parseInt(input)
+                _state.value = if (checkLeapYear(year)) State.LEAP else State.NOT_LEAP
+            }
+
+        }
     }
 
     fun setState(state: State){

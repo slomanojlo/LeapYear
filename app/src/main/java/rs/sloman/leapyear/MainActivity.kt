@@ -30,13 +30,7 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
 
         binding.btnCheckYear.setOnClickListener {
-            if (binding.etEnterLeapYear.text.isNotEmpty()) {
-                val year = Integer.parseInt(binding.etEnterLeapYear.text.toString())
-
-                CoroutineScope(Dispatchers.Default).launch {
-                    viewModel.handleButtonClick(year)
-                }
-            }
+            viewModel.handleButtonClick(binding.etEnterLeapYear.text.toString())
         }
 
         viewModel.state.observe(this) {
