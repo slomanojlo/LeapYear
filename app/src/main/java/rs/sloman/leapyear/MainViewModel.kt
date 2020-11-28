@@ -22,7 +22,7 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
         var isLeap = false
 
         val job = viewModelScope.launch {
-            isLeap = isLeapYear(year)
+            isLeap = LeapYearCheck.isLeapYear(year)
         }
         job.join()
 
@@ -31,18 +31,6 @@ class MainViewModel(private val repo: Repository) : ViewModel() {
 
     suspend fun handleButtonClick(year: Int) {
         _state.postValue(if (checkLeapYear(year)) State.LEAP else State.NOT_LEAP)
-    }
-
-    private fun isLeapYear(year: Int) : Boolean{
-        return when {
-            year % 4 == 0 -> {
-                when {
-                    year % 100 == 0 -> year % 400 == 0
-                    else -> true
-                }
-            }
-            else -> false
-        }
     }
 
     fun setState(state: State){
