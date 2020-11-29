@@ -2,12 +2,8 @@ package rs.sloman.leapyear
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import rs.sloman.leapyear.databinding.ActivityMainBinding
 
@@ -33,6 +29,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.handleButtonClick(binding.etEnterLeapYear.text.toString())
         }
 
+        binding.etEnterLeapYear.doOnTextChanged { text: CharSequence?, _, _, _ ->
+            viewModel.handleOnTextChanged(text)
+        }
+
         viewModel.state.observe(this) {
             when (it) {
                 MainViewModel.State.LEAP -> {
@@ -51,9 +51,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.etEnterLeapYear.doOnTextChanged { text: CharSequence?, _, _, _ ->
-            viewModel.setState(MainViewModel.State.BLANK)
-            binding.btnCheckYear.isEnabled = !text.isNullOrEmpty()
+        viewModel.isBtnCheckStateEnabled.observe(this){
+            binding.btnCheckYear.isEnabled = it
         }
 
 
