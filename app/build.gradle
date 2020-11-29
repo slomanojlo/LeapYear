@@ -50,6 +50,7 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
 
     testImplementation "junit:junit:$junit_version"
+    testImplementation  "pl.pragmatists:JUnitParams:$junit_params_version"
     androidTestImplementation "androidx.test.ext:junit:$android_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
