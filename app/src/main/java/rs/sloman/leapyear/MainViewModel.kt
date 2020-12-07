@@ -8,12 +8,6 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repo: Repository) : ViewModel() {
 
-    enum class State {
-        BLANK,
-        LEAP,
-        NOT_LEAP
-    }
-
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> get() = _state
 

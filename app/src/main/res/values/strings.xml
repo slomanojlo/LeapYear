@@ -4,4 +4,5 @@
     <string name="check">Check</string>
     <string name="this_year_is_leap">This year is leap.</string>
     <string name="this_year_is_not_leap">This year is not leap.</string>
+    <string name="empty" />
 </resources>

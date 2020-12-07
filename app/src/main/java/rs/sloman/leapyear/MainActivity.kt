@@ -1,7 +1,6 @@
 package rs.sloman.leapyear
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,21 +33,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.state.observe(this) {
-            when (it) {
-                MainViewModel.State.LEAP -> {
-                    binding.twResult.text = getString(R.string.this_year_is_leap)
-                    binding.twResult.visibility = View.VISIBLE
-                }
 
-                MainViewModel.State.NOT_LEAP -> {
-                    binding.twResult.text = getString(R.string.this_year_is_not_leap)
-                    binding.twResult.visibility = View.VISIBLE
-                }
-
-                else -> {
-                    binding.twResult.visibility = View.INVISIBLE
-                }
+            binding.twResult.apply{
+                text = getString(it.message)
+                visibility = it.visibility
             }
+
         }
 
         viewModel.isBtnCheckStateEnabled.observe(this){
@@ -74,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
 
         val yearInput = savedInstanceState.getString(YEAR_INPUT, "")
-        val state = savedInstanceState.getSerializable(STATE) as MainViewModel.State
+        val state = savedInstanceState.getSerializable(STATE) as State
 
         binding.etEnterLeapYear.setText(yearInput)
         viewModel.setState(state)
