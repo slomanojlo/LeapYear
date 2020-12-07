@@ -9,7 +9,7 @@ import org.junit.Test
 class LeapYearLiveDataStateTest {
 
     @Test
-    fun shouldReturnVisibilityGone_WhenStateIsLEAP(){
+    fun shouldReturnVisibilityGone_WhenStateIsBLANK(){
 
         val state = MutableLiveData(State.BLANK)
 
@@ -33,6 +33,29 @@ class LeapYearLiveDataStateTest {
     }
 
 
+    @Test
+    fun shouldReturnMessagegEmpty_WhenStateIsBlank(){
+
+        val state = MutableLiveData(State.BLANK)
+
+        assertEquals(state.value?.message, R.string.empty)
+    }
+
+    @Test
+    fun shouldReturnMessageLeap_WhenStateIsLEAP(){
+
+        val state = MutableLiveData(State.LEAP)
+
+        assertEquals(state.value?.message, R.string.this_year_is_leap)
+    }
+
+    @Test
+    fun shouldReturnMessageNotLeap_WhenStateIsNotLEAP(){
+
+        val state = MutableLiveData(State.NOT_LEAP)
+
+        assertEquals(state.value?.message, R.string.this_year_is_not_leap)
+    }
 
 
 }
